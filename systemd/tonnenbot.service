@@ -1,0 +1,16 @@
+[Unit]
+Description=tonnenbot — daily Matrix reminder for tomorrow's waste pickup
+After=network-online.target
+Wants=network-online.target
+PartOf=default.target
+
+[Service]
+Type=simple
+EnvironmentFile=%h/.tonnenbot-secrets/tonnenbot.env
+ExecStart=%h/.local/venvs/tonnenbot/bin/python -m tonnenbot.main
+WorkingDirectory=%h/matrix-tonnenbot
+Restart=on-failure
+RestartSec=15
+
+[Install]
+WantedBy=default.target
